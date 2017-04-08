@@ -109,42 +109,28 @@ while {restartCheckActive} do
 
 	_serverFPS = round((_serverFPS1 + _serverFPS2 + _serverFPS3) / 3);
 
-	If (_serverUpTime >= 9600 && _serverUpTime < 13200 && _serverFPS < 15) then // 3 hour restart
+	If (_serverUpTime >= 9600 && _serverUpTime < 13200 && _serverFPS < 16) then // 3 hour restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
 		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
 	};
 
-	If (_serverUpTime >= 13200 && _serverUpTime < 16800 && _serverFPS < 20) then // 4 hour restart
+	If (_serverUpTime >= 13200 && _serverUpTime < 16800 && _serverFPS < 21) then // 4 hour restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
 		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
 	};
 
-	If (_serverUpTime >= 16800 && _serverUpTime < 20400 && _serverFPS < 25) then // 5 hour restart
+	If (_serverUpTime >= 16800 && _serverUpTime < 20400 && _serverFPS < 26) then // 5 hour restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
 		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
 	};
 
-	If (_serverUpTime >= 20400 && _serverUpTime < 24000 && _serverFPS < 30) then // 6 hour restart
-	{
-		restartCheckActive = false;
-		call _restartServer;
-		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
-	};
-
-	If (_serverUpTime >= 24000 && _serverUpTime < 27600 && _serverFPS < 35) then // 7 hour restart
-	{
-		restartCheckActive = false;
-		call _restartServer;
-		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
-	};
-
-	If (_serverUpTime >= 27600) then // 8 hour forced restart
+	If (_serverUpTime >= 20400) then // 6 hour forced restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
