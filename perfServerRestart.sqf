@@ -71,7 +71,7 @@ _restartServer = {
 
 	format ["#lock" call _commandSend];
 	diag_log format ["[SERVER RESTART] -> SERVER LOCKED, RESTART IN 5 MINUTES"];
-	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FF5500' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 5 MINUTES<br/><t color='#FF5500' size='0.65'>THE SERVER IS NOW LOCKED UNTIL RESTART",0,0.7,10,0];
+	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FF5500' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 5 MINUTES<br/><t color='#FF5500' size='0.65'>LAND ALL AIR VEHICLES BEFORE RESTART",0,0.7,10,0];
 	publicVariable "RM_DISPLAYTEXT_PUBVAR";
 	uiSleep 180;
 
@@ -87,7 +87,7 @@ _restartServer = {
 	[[], "A3W_fnc_reboot", OPFOR, true] call BIS_fnc_MP;
 	[[], "A3W_fnc_reboot", INDEPENDENT, true] call BIS_fnc_MP;
 	call fn_saveAllObjects;
-	uiSleep 10;
+	uiSleep 30;
 	call _kickAllPlayers;
 	uiSleep 30;
 	format ["#shutdown" call _commandSend];
