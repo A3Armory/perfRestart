@@ -61,32 +61,44 @@ _kickAllPlayers = {
 };
 
 _restartServer = {
+	diag_log format ["[SERVER RESTART IN 30 MINUTES] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
+	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FFFF00' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 30 MINUTES",0,0.7,10,0];
+	publicVariable "RM_DISPLAYTEXT_PUBVAR";
+	uiSleep 600;
+
+	diag_log format ["[SERVER RESTART IN 20 MINUTES] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FFFF00' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 20 MINUTES",0,0.7,10,0];
 	publicVariable "RM_DISPLAYTEXT_PUBVAR";
 	uiSleep 600;
 
+	diag_log format ["[SERVER RESTART IN 10 MINUTES] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FF5500' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 10 MINUTES<br/><t color='#FF5500' size='0.65'>LOCK/SAVE VEHICLES AND OBJECTS IF YOU HAVEN'T ALREADY",0,0.7,10,0];
 	publicVariable "RM_DISPLAYTEXT_PUBVAR";
 	uiSleep 300;
 
+	diag_log format ["[SERVER RESTART IN 5 MINUTES] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	format ["#lock" call _commandSend];
-	diag_log format ["[SERVER RESTART] -> SERVER LOCKED, RESTART IN 5 MINUTES"];
+	diag_log format ["[SERVER RESTART] -> SERVER LOCKED"];
 	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FF5500' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 5 MINUTES<br/><t color='#FF5500' size='0.65'>LAND ALL AIR VEHICLES BEFORE RESTART",0,0.7,10,0];
 	publicVariable "RM_DISPLAYTEXT_PUBVAR";
 	uiSleep 180;
 
+	diag_log format ["[SERVER RESTART IN 2 MINUTES] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FF5500' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 2 MINUTES<br/><t color='#FF5500' size='0.65'>EXIT VEHICLE BEFORE RESTART",0,0.7,10,0];
 	publicVariable "RM_DISPLAYTEXT_PUBVAR";
 	uiSleep 60;
 
+	diag_log format ["[SERVER RESTART IN 60 SECONDS] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	RM_DISPLAYTEXT_PUBVAR = ["<t color='#FF5500' size='0.65'>ATTENTION</t><br/><t size='0.65'>THE SERVER WILL RESTART IN 60 SECONDS",0,0.7,10,0];
 	publicVariable "RM_DISPLAYTEXT_PUBVAR";
 	uiSleep 60;
-	diag_log format ["[SERVER RESTART] -> SERVER RESTARTING..."];
+
+	diag_log format ["[SERVER RESTARTING] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	[[], "A3W_fnc_reboot", BLUFOR, true] call BIS_fnc_MP;
 	[[], "A3W_fnc_reboot", OPFOR, true] call BIS_fnc_MP;
 	[[], "A3W_fnc_reboot", INDEPENDENT, true] call BIS_fnc_MP;
 	call fn_saveAllObjects;
+	diag_log format ["[SERVER RESTART SAVED ALL OBJECTS] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	uiSleep 30;
 	call _kickAllPlayers;
 	uiSleep 30;
@@ -107,34 +119,34 @@ while {restartCheckActive} do
 	uiSleep 1;
 	_serverFPS3 = diag_fps;
 
-	_serverFPS = round((_serverFPS1 + _serverFPS2 + _serverFPS3) / 3);
+	_serverFPS = floor((_serverFPS1 + _serverFPS2 + _serverFPS3) / 3);
 
-	If (_serverUpTime >= 9600 && _serverUpTime < 13200 && _serverFPS < 16) then // 3 hour restart
+	If (_serverUpTime >= 9600 && _serverUpTime < 12600 && _serverFPS < 15) then // 3 hour restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
-		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
+		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	};
 
-	If (_serverUpTime >= 13200 && _serverUpTime < 16800 && _serverFPS < 21) then // 4 hour restart
+	If (_serverUpTime >= 12600 && _serverUpTime < 16200 && _serverFPS < 20) then // 4 hour restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
-		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
+		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	};
 
-	If (_serverUpTime >= 16800 && _serverUpTime < 20400 && _serverFPS < 26) then // 5 hour restart
+	If (_serverUpTime >= 16200 && _serverUpTime < 19800 && _serverFPS < 25) then // 5 hour restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
-		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
+		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	};
 
-	If (_serverUpTime >= 20400) then // 6 hour forced restart
+	If (_serverUpTime >= 19800) then // 6 hour forced restart
 	{
 		restartCheckActive = false;
 		call _restartServer;
-		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, round(diag_TickTime)];
+		diag_log format ["[SERVER RESTART] -> SERVER FPS IS %1 - UP TIME IS %2 - TICK TIME IS %3", _serverFPS, _serverUpTime, floor(diag_TickTime)];
 	};
 
 	uiSleep 300;
